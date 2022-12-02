@@ -1,4 +1,4 @@
-package uz.com.applimonpay.common;
+package uz.applimonpay.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package uz.com.applimonpay.exception;
+package uz.applimonpay.exception;
 
 public class CustomNotFoundException extends Exception {
     public CustomNotFoundException(String message) {

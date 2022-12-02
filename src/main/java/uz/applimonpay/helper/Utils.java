@@ -1,4 +1,4 @@
-package uz.com.applimonpay.helper;
+package uz.applimonpay.helper;
 
 import org.springframework.util.StringUtils;
 

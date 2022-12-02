@@ -1,4 +1,4 @@
-package uz.com.applimonpay.base;
+package uz.applimonpay.base;
 
 public interface BaseService {
 }

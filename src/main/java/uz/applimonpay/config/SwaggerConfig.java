@@ -1,4 +1,4 @@
-package uz.com.applimonpay.config;
+package uz.applimonpay.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
