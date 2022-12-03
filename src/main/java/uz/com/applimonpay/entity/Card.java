@@ -50,4 +50,7 @@ public class Card extends BaseEntity {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(name = "card_token")
+    private String cardToken;
+
 }
