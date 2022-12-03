@@ -77,4 +77,10 @@ public class Operation extends BaseEntity {
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime endTime;
 
+    @Column(name = "need_confirm", columnDefinition = "BOOLEAN default false")
+    private Boolean needConfirm = Boolean.FALSE;
+
+    @Column(name = "confirm_code")
+    private String confirmCode;
+
 }
