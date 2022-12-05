@@ -5,48 +5,57 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uz.applimonpay.base.BaseEntity;
+import uz.applimonpay.enums.CardType;
+import uz.applimonpay.enums.CurrencyEnum;
+
 
 import javax.persistence.*;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cards")
+@Entity
+@Table(name = "user_cards")
 public class Card extends BaseEntity {
 
-    @Column(name = "pans",unique = true)
+    @Column(name = "pan", nullable = false)
     private String pan;
 
-    @Column(name = "expiry")
-    private Integer expiry;
+    @Column(name = "expiry", nullable = false)
+    private String expiry;
 
-    @Column(name = "masked_pan")
+    @Column(name = "masked_pan", nullable = false)
     private String maskedPan;
 
-    @Column(name = "card_holder_name")
+    @Column(name = "card_holder_name", nullable = false)
     private String cardHolderName;
 
-    @Column(name = "type")
-    private String type;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "card_type")
+    private CardType type;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "currency")
-    private String currency;
-
-    @Column(name = "phone")
-    private String phone;
+    private CurrencyEnum currency;
 
     @Column(name = "balance")
-    private Integer balance;
+    private Long balance;
+
+    @Column(name = "phone")
+    private String phone; // sms info
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User user;
-
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
+
+    @Column(name = "card_token")
+    private String cardToken;
+
 
 
 }
+
 

@@ -3,15 +3,16 @@ package uz.applimonpay.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.applimonpay.service.CardService;
 import uz.applimonpay.base.BaseURI;
 import uz.applimonpay.common.ResponseData;
 import uz.applimonpay.dto.card.CardCreateDTO;
 import uz.applimonpay.dto.card.CardDTO;
 import uz.applimonpay.dto.card.CardUpdateDTO;
+import uz.applimonpay.service.CardService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,9 +26,9 @@ public class CardController {
         return service.getAll();
     }
 
-    @GetMapping(BaseURI.GET + "/{id}")
-    public ResponseEntity<ResponseData<CardDTO>> get(@PathVariable(value = "id") Integer id) {
-        return service.get(id);
+    @GetMapping(BaseURI.GET + "/{uuid}")
+    public ResponseEntity<ResponseData<CardDTO>> get(@PathVariable(value = "uuid") UUID userUid) {
+        return service.get(userUid);
     }
 
     @PostMapping(BaseURI.ADD)
@@ -41,7 +42,7 @@ public class CardController {
     }
 
     @PutMapping(BaseURI.DELETE)
-    public ResponseEntity<ResponseData<Boolean>> delete(Integer id) {
+    public ResponseEntity<ResponseData<Boolean>> delete(Long id) {
         return service.delete(id);
     }
 

@@ -8,17 +8,20 @@ import uz.applimonpay.dto.user.UserDTO;
 import uz.applimonpay.dto.user.UserUpdateDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UserService {
 
-    ResponseEntity<ResponseData<List<UserDTO>>> getAll();
+    ResponseEntity<ResponseData<List<UserDTO>>> getAll(UUID userUid);
 
-    ResponseEntity<ResponseData<UserDTO>> get(Integer id);
+    ResponseEntity<ResponseData<UserDTO>> get(UUID userUid);
 
     ResponseEntity<ResponseData<UserDTO>> add(UserCreateDTO dto);
 
     ResponseEntity<ResponseData<UserDTO>> edit(UserUpdateDTO dto);
 
-    ResponseEntity<ResponseData<Boolean>> delete(Integer id);
 
+    ResponseEntity<ResponseData<Boolean>> delete(Long id);
+
+    UserDTO change(String uuid, String oldPassword, String newPassword);
 }

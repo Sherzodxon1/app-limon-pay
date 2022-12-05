@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,7 +13,7 @@ import java.util.UUID;
 public class CardUpdateDTO {
 
     @NotNull(message = "Id is required !!!")
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "Pan is required !!!")
     private String pan;

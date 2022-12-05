@@ -6,35 +6,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uz.applimonpay.base.BaseEntity;
 
-import javax.persistence.*;
-
-@Entity
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "users")
-public class User  {
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    protected Integer id;
-
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(name = "middle_name")
     private String middleName;
 
-    @Column(name = "phone", unique = true)
+    @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "password")
-    private Integer password;
-
+    @Column(name = "password", nullable = false)
+    private String password;
 
 }
+

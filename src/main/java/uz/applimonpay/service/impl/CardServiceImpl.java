@@ -15,6 +15,8 @@ import uz.applimonpay.repository.CardRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
@@ -31,9 +33,9 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public ResponseEntity<ResponseData<CardDTO>> get(Integer id) {
+    public ResponseEntity<ResponseData<CardDTO>> get(UUID cardUid) {
 
-        Optional<Card> cardOptional = repository.findById(id);
+        Optional<Card> cardOptional = repository.findByUuid(cardUid);
         if (cardOptional.isEmpty()) {
             throw new RuntimeException("Card is not found !!!");
         }
@@ -53,7 +55,7 @@ public class CardServiceImpl implements CardService {
 
         Optional<Card> cardOptional = repository.findById(dto.getId());
         if (cardOptional.isEmpty()) {
-            throw new RuntimeException("Employee is not found !!!");
+            throw new RuntimeException("Card is not found !!!");
         }
         Card card = mapper.toEntity(cardOptional.get(), dto);
         repository.save(card);
@@ -61,7 +63,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public ResponseEntity<ResponseData<Boolean>> delete(Integer id) {
+    public ResponseEntity<ResponseData<Boolean>> delete(Long id) {
 
         Optional<Card> cardOptional = repository.findById(id);
         if (cardOptional.isEmpty()) {

@@ -6,9 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CardType {
-    HUMO("Humo"),
-    UZCARD("Uzcard"),
-    VISA("Visa");
+    HUMO,
+    UZCARD
 
-    private final String name;
 }

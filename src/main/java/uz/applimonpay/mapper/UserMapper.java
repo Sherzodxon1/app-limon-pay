@@ -8,6 +8,8 @@ import uz.applimonpay.dto.user.UserDTO;
 import uz.applimonpay.dto.user.UserUpdateDTO;
 import uz.applimonpay.entity.User;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
@@ -30,4 +32,6 @@ public interface UserMapper {
     @Mapping(target = "middleName", source = "dto.middleName")
     @Mapping(target = "phone", source = "dto.phone")
     User toEntity(@MappingTarget User user, UserUpdateDTO dto);
+
+    List<UserDTO> toDtoList(List<User> userList);
 }

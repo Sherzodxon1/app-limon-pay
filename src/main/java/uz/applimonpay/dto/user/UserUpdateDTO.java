@@ -14,7 +14,7 @@ import java.util.UUID;
 public class UserUpdateDTO {
 
     @NotNull(message = "Id is required !!!")
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "First_name is required !!!")
     private String firstName;

@@ -16,6 +16,7 @@ import uz.applimonpay.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,19 +27,20 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
 
     @Override
-    public ResponseEntity<ResponseData<List<UserDTO>>> getAll() {
-        List<User> list = repository.findAll();
+    public ResponseEntity<ResponseData<List<UserDTO>>> getAll(UUID userUid) {
+        List<User> list = repository.findAllByUuid(userUid);
         List<UserDTO> dtoList = new ArrayList<>();
         list.forEach(user -> dtoList.add(mapper.toDto(user)));
         return ResponseData.success200(dtoList);
     }
 
-    @Override
-    public ResponseEntity<ResponseData<UserDTO>> get(Integer id) {
 
-        Optional<User> userOptional = repository.findById(id);
+    @Override
+    public ResponseEntity<ResponseData<UserDTO>> get(UUID userUid) {
+
+        Optional<User> userOptional = repository.findByUuid(userUid);
         if (userOptional.isEmpty()) {
-            throw new RuntimeException("Employee is not found !!!");
+            throw new RuntimeException("User is not found !!!");
         }
         return ResponseData.success200(mapper.toDto(userOptional.get()));
     }
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<ResponseData<Boolean>> delete(Integer id) {
+    public ResponseEntity<ResponseData<Boolean>> delete(Long id) {
 
         Optional<User> userOptional = repository.findById(id);
         if (userOptional.isEmpty()) {
@@ -73,4 +75,16 @@ public class UserServiceImpl implements UserService {
         repository.delete(userOptional.get());
         return ResponseData.success200(true);
     }
+
+    @Override
+    public UserDTO change(String uuid, String oldPassword, String newPassword)  {
+        User user = repository.findByUuid(uuid);
+        if (!user.getPassword().equals(oldPassword)){
+            throw new RuntimeException("error");
+        }
+        user.setPassword(newPassword);
+        repository.save(user);
+        return mapper.toDto(user);
+    }
+
 }

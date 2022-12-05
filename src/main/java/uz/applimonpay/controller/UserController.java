@@ -12,6 +12,7 @@ import uz.applimonpay.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,13 +22,13 @@ public class UserController {
     private final UserService service;
 
     @GetMapping(BaseURI.GET + BaseURI.ALL)
-    public ResponseEntity<ResponseData<List<UserDTO>>> getAll() {
-        return service.getAll();
+    public ResponseEntity<ResponseData<List<UserDTO>>> getAll(@RequestParam(value = "uuid") UUID userUid) {
+        return service.getAll(userUid);
     }
 
-    @GetMapping(BaseURI.GET + "/{id}")
-    public ResponseEntity<ResponseData<UserDTO>> get(@PathVariable(value = "id") Integer id) {
-        return service.get(id);
+    @GetMapping(BaseURI.GET + "/{uuid}")
+    public ResponseEntity<ResponseData<UserDTO>> get(@PathVariable(value = "uuid") UUID userUid) {
+        return service.get(userUid);
     }
 
     @PostMapping(BaseURI.ADD)
@@ -41,7 +42,7 @@ public class UserController {
     }
 
     @PutMapping(BaseURI.DELETE)
-    public ResponseEntity<ResponseData<Boolean>> delete(Integer id) {
+    public ResponseEntity<ResponseData<Boolean>> delete(Long id) {
         return service.delete(id);
     }
 
